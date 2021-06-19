@@ -1,0 +1,58 @@
+syntax = "proto3";
+  
+package grpc.holders;
+  
+import "proto/holders/holders.messages.proto";
+  
+// API for managing customers
+service HoldersAPI {
+  // Get all customers
+  rpc ListHolders(ListHoldersRequest) returns (ListHoldersResponse);
+  // Get customer by Movie ID
+  rpc GetHolderByMovieId(GetHolderByMovieIdRequest) returns (GetHolderByMovieIdResponse);
+  // Get customer by ID
+  rpc GetHolder(GetHolderRequest) returns (GetHolderResponse);
+  // Add new customer
+  rpc AddHolder(AddHolderRequest) returns (AddHolderResponse);
+  // Update customer
+  rpc UpdateHolder(UpdateHolderRequest) returns (UpdateHolderResponse);
+}
+  
+message ListHoldersRequest {
+}
+  
+message ListHoldersResponse {
+  repeated Holder holders = 1;
+}
+  
+message GetHolderByMovieIdRequest {
+  string id = 1;
+}
+  
+message GetHolderByMovieIdResponse {
+  Holder holder = 1;
+}
+  
+message GetHolderRequest {
+  string id = 1;
+}
+  
+message GetHolderResponse {
+  Holder holder = 1;
+}
+  
+message AddHolderRequest {
+  Holder holder = 1;
+}
+  
+message AddHolderResponse {
+  Holder holder = 1;
+}
+  
+message UpdateHolderRequest {
+  Holder holder = 1;
+}
+  
+message UpdateHolderResponse {
+  Holder holder = 1;
+}

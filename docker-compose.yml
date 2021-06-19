@@ -1,0 +1,66 @@
+version: "3.8"
+
+# Common context for all services
+x-common-dev: &common-books
+  build:
+    context: .
+    dockerfile: Dockerfile.dev
+  volumes:
+    - ./:/book-retal
+
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - 27017:27017
+
+
+  books:
+    <<: *common-books
+    command: go run /book-retal/books
+    environment:
+      USER: root
+      PASS: root
+      DB: DBbooks
+      COLLECTION: books
+      DBPORT: 27017
+      APP_PORT: 6001
+    ports:
+      - 6001:6001
+    links:
+      - mongodb
+
+  holders:
+    <<: *common-books
+    command: go run ./holders
+    environment:
+      USER: root
+      PASS: root
+      DB: DBholders
+      COLLECTION: holders
+      DBPORT: 27017
+      APP_PORT: 6001
+    ports:
+      - 6005:6001
+    links:
+      - mongodb
+
+  graphql:
+    <<: *common-books
+    command: go run ./graph_api
+    environment:
+      BOOKS_SERVICE: books:6001
+      HOLDERS_SERVICE: holders:6001
+      GRAPH_API_PORT: 80
+    ports:
+      - 80:80
+    links:
+      - books
+      - holders
+
+volumes:
+  db_container:

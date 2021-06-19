@@ -1,0 +1,11 @@
+FROM golang:1.14-stretch 
+# Downloading an image for graphql, books, holders services
+WORKDIR /book-retal
+# Copying all dependencies to the container
+COPY ./ ./
+RUN go mod download
+# Exposing ports that will be available from the container
+EXPOSE 80
+EXPOSE 60001
+# Installing a work directory inside the container
+# WORKDIR /tutorial 

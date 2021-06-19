@@ -1,0 +1,11 @@
+syntax = "proto3";
+  
+package grpc.movies;
+  
+//  Movie definition
+message Movie {
+  string id = 1;
+  string diractor = 2;
+  string title = 3;
+  string genres = 4;
+} 

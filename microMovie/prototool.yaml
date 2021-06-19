@@ -1,0 +1,13 @@
+protoc:
+  version: 3.11.0
+lint:
+  group: uber2
+
+generate:
+  go_options:
+    import_path: microservices
+  plugins:
+    - name: go
+      type: go
+      flags: plugins=grpc
+      output: proto/gen

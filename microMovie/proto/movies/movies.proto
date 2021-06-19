@@ -1,0 +1,62 @@
+syntax = "proto3";
+  
+package grpc.movies;
+  
+import "proto/movies/movies.messages.proto";
+  
+// API for managing Movies
+service MoviesAPI {
+  // Get all Movies
+  rpc ListMovies(ListMoviesRequest) returns (ListMoviesResponse);
+  // Get Movie by ID
+  rpc GetMovie(GetMovieRequest) returns (GetMovieResponse);
+  // Get Movie by IDs
+  rpc GetMovies(GetMoviesRequest) returns (GetMoviesResponse);
+  // Add new Movie
+  rpc AddMovie(AddMovieRequest) returns (AddMovieResponse);
+  // Delete Movie
+  rpc DeleteMovie(DeleteMovieRequest) returns (DeleteMovieResponse);
+}
+  
+message ListMoviesRequest {
+}
+  
+message ListMoviesResponse {
+  repeated Movie movies = 1;
+}
+  
+message GetMovieRequest {
+  string id = 1;
+}
+  
+message GetMovieResponse {
+  Movie movies = 1;
+}
+  
+message GetMoviesRequest {
+  repeated string ids = 1;
+}
+  
+message GetMoviesResponse {
+  repeated Movie movies = 1;
+}
+  
+message GetMovieByISBNResponse {
+  Movie movie = 1;
+}
+  
+message AddMovieRequest {
+  Movie movie = 1;
+}
+  
+message AddMovieResponse {
+  Movie movie = 1;
+}
+  
+message DeleteMovieRequest {
+  string id = 1;
+}
+  
+message DeleteMovieResponse {
+    Movie movie = 1;
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package grpc.holders.v1;
+
+// book definition
+message Holder {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+    repeated string held_books = 6;
+}
